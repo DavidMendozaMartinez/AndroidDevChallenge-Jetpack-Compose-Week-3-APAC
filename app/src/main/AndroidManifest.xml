@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bloom">
         <activity
-            android:name="com.androiddevchallenge.week3.apac.MainActivity"
+            android:name="com.androiddevchallenge.week3.apac.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Bloom.NoActionBar">
             <intent-filter>
