@@ -15,10 +15,13 @@
  */
 package com.androiddevchallenge.week3.apac.ui
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.rememberNavController
 import com.androiddevchallenge.week3.apac.ui.theme.BloomTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -28,6 +31,7 @@ fun BloomApp() {
     ProvideWindowInsets {
         BloomTheme {
             val systemUiController = rememberSystemUiController()
+            val navController = rememberNavController()
             val useDarkIcons = MaterialTheme.colors.isLight
 
             // Update all of the system bar colors to be transparent, and use
@@ -37,7 +41,12 @@ fun BloomApp() {
                 darkIcons = useDarkIcons
             )
 
-            Scaffold(backgroundColor = MaterialTheme.colors.background) {}
+            Scaffold(backgroundColor = MaterialTheme.colors.background) { innerPadding ->
+                NavGraph(
+                    modifier = Modifier.padding(innerPadding),
+                    navController = navController
+                )
+            }
         }
     }
 }
