@@ -16,7 +16,25 @@
 package com.androiddevchallenge.week3.apac.ui.screen.welcome
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.androiddevchallenge.week3.apac.ui.theme.BloomTheme
 
 @Composable
 fun Welcome() {
+}
+
+@Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun WelcomeLightPreview() {
+    BloomTheme {
+        Welcome()
+    }
+}
+
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun WelcomeDarkPreview() {
+    BloomTheme(darkTheme = true) {
+        Welcome()
+    }
 }
