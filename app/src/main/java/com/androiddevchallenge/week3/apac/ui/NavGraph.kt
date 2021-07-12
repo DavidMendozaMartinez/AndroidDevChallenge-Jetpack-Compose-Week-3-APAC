@@ -42,7 +42,12 @@ fun NavGraph(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(Destinations.WELCOME.route) { Welcome() }
+        composable(Destinations.WELCOME.route) {
+            Welcome(
+                onCreateAccountButtonClick = {},
+                onLogInButtonClick = { navController.navigate(Destinations.LOG_IN.route) }
+            )
+        }
         composable(Destinations.LOG_IN.route) {}
         composable(Destinations.MAIN.route) {}
     }

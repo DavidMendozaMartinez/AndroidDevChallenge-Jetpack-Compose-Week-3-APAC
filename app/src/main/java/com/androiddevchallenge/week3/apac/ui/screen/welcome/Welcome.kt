@@ -41,7 +41,10 @@ import com.androiddevchallenge.week3.apac.R
 import com.androiddevchallenge.week3.apac.ui.theme.BloomTheme
 
 @Composable
-fun Welcome() {
+fun Welcome(
+    onCreateAccountButtonClick: () -> Unit = {},
+    onLogInButtonClick: () -> Unit = {}
+) {
     Surface(color = MaterialTheme.colors.primary) {
         Image(
             painter = painterResource(id = R.drawable.welcome_bg),
@@ -79,7 +82,7 @@ fun Welcome() {
             )
 
             Button(
-                onClick = {},
+                onClick = onCreateAccountButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
@@ -99,7 +102,7 @@ fun Welcome() {
             Spacer(modifier = Modifier.height(8.dp))
 
             TextButton(
-                onClick = {},
+                onClick = onLogInButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
