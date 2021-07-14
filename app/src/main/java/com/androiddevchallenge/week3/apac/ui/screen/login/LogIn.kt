@@ -16,7 +16,25 @@
 package com.androiddevchallenge.week3.apac.ui.screen.login
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.androiddevchallenge.week3.apac.ui.theme.BloomTheme
 
 @Composable
 fun LogIn() {
+}
+
+@Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun LogInLightPreview() {
+    BloomTheme {
+        LogIn()
+    }
+}
+
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun LogInDarkPreview() {
+    BloomTheme(darkTheme = true) {
+        LogIn()
+    }
 }
