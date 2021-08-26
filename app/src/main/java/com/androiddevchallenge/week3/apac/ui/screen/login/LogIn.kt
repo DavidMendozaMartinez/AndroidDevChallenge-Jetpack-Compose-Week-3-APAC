@@ -55,7 +55,10 @@ object Routes {
 }
 
 @Composable
-fun LogIn() {
+fun LogIn(
+    onHyperlinkClick: (String) -> Unit = {},
+    onLogInButtonClick: (email: String, password: String) -> Unit = { _, _ -> }
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -119,11 +122,12 @@ fun LogIn() {
                 style = MaterialTheme.typography.body2.copy(
                     color = MaterialTheme.colors.onBackground,
                     textAlign = TextAlign.Center,
-                )
+                ),
+                onHyperlinkClick = onHyperlinkClick
             )
 
             Button(
-                onClick = {},
+                onClick = { onLogInButtonClick(email, password) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -145,7 +149,8 @@ fun LogIn() {
 @Composable
 fun ConsentText(
     modifier: Modifier = Modifier,
-    style: TextStyle = TextStyle.Default
+    style: TextStyle = TextStyle.Default,
+    onHyperlinkClick: (String) -> Unit = {}
 ) {
     val consent = stringResource(id = R.string.log_in_consent)
     val termsOfUse = stringResource(id = R.string.log_in_consent_terms_of_use)
@@ -177,8 +182,8 @@ fun ConsentText(
             text.getStringAnnotations(start = offset, end = offset)
                 .firstOrNull()?.let { annotation ->
                     when (annotation.tag) {
-                        termsOfUse -> {}
-                        privacyPolicy -> {}
+                        termsOfUse -> onHyperlinkClick(annotation.item)
+                        privacyPolicy -> onHyperlinkClick(annotation.item)
                     }
                 }
         }
