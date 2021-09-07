@@ -22,4 +22,9 @@
     <string name="log_in_consent_terms_of_use">Terms of Use</string>
     <string name="log_in_consent_privacy_policy">Privacy Policy</string>
     <string name="log_in_button_log_in">Log in</string>
+
+    <string name="main_label_home">Home</string>
+    <string name="main_label_favorites">Favorites</string>
+    <string name="main_label_profile">Profile</string>
+    <string name="main_label_cart">Cart</string>
 </resources>
