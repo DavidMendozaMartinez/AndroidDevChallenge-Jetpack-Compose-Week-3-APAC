@@ -21,7 +21,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.androiddevchallenge.week3.apac.ui.screen.login.LogIn
+import com.androiddevchallenge.week3.apac.ui.screen.main.MainSections
+import com.androiddevchallenge.week3.apac.ui.screen.main.addMainGraph
 import com.androiddevchallenge.week3.apac.ui.screen.welcome.Welcome
 
 /**
@@ -55,6 +58,11 @@ fun NavGraph(
                 onLogInButtonClick = { _, _ -> navController.navigate(Destinations.MAIN.route) }
             )
         }
-        composable(Destinations.MAIN.route) {}
+        navigation(
+            route = Destinations.MAIN.route,
+            startDestination = MainSections.HOME.route
+        ) {
+            addMainGraph(modifier)
+        }
     }
 }
