@@ -17,7 +17,25 @@ package com.androiddevchallenge.week3.apac.ui.screen.main.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.androiddevchallenge.week3.apac.ui.theme.BloomTheme
 
 @Composable
 fun Home(modifier: Modifier = Modifier) {
+}
+
+@Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun HomeLightPreview() {
+    BloomTheme {
+        Home()
+    }
+}
+
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun HomeDarkPreview() {
+    BloomTheme(darkTheme = true) {
+        Home()
+    }
 }
