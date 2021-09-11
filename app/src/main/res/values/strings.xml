@@ -27,4 +27,9 @@
     <string name="main_label_favorites">Favorites</string>
     <string name="main_label_profile">Profile</string>
     <string name="main_label_cart">Cart</string>
+
+    <string name="home_label_search">Search</string>
+    <string name="home_title_themes">Browse themes</string>
+    <string name="home_title_plants">Design your home garden</string>
+    <string name="home_content_description_button_filter_plants">Filter plants</string>
 </resources>
