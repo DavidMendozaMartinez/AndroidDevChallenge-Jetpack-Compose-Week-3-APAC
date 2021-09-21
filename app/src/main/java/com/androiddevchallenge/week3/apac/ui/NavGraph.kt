@@ -22,6 +22,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.androiddevchallenge.week3.apac.data.PlantRepository
+import com.androiddevchallenge.week3.apac.data.ThemeRepository
 import com.androiddevchallenge.week3.apac.ui.screen.login.LogIn
 import com.androiddevchallenge.week3.apac.ui.screen.main.MainSections
 import com.androiddevchallenge.week3.apac.ui.screen.main.addMainGraph
@@ -62,7 +64,19 @@ fun NavGraph(
             route = Destinations.MAIN.route,
             startDestination = MainSections.HOME.route
         ) {
-            addMainGraph(modifier)
+            // The lists of themes, plants and selected plants are received from here
+            // for simplicity. In a context more faithful to reality, they would be
+            // obtained through the ViewModel associated with the screen.
+            val themes = ThemeRepository.getThemes()
+            val plants = PlantRepository.getPlants()
+            val selected = listOf(plants.first())
+
+            addMainGraph(
+                modifier = modifier,
+                themes = themes,
+                plants = plants,
+                selected = selected
+            )
         }
     }
 }

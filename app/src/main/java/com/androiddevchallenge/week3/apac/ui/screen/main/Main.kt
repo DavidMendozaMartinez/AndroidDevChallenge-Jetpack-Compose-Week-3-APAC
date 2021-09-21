@@ -38,12 +38,26 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.androiddevchallenge.week3.apac.R
+import com.androiddevchallenge.week3.apac.model.Plant
+import com.androiddevchallenge.week3.apac.model.Theme
 import com.androiddevchallenge.week3.apac.ui.screen.main.home.Home
 import com.google.accompanist.insets.navigationBarsHeight
 import com.google.accompanist.insets.navigationBarsPadding
 
-fun NavGraphBuilder.addMainGraph(modifier: Modifier = Modifier) {
-    composable(MainSections.HOME.route) { Home(modifier) }
+fun NavGraphBuilder.addMainGraph(
+    modifier: Modifier = Modifier,
+    themes: List<Theme> = emptyList(),
+    plants: List<Plant> = emptyList(),
+    selected: List<Plant> = emptyList()
+) {
+    composable(MainSections.HOME.route) {
+        Home(
+            modifier = modifier,
+            themes = themes,
+            plants = plants,
+            selected = selected
+        )
+    }
     composable(MainSections.FAVORITES.route) {}
     composable(MainSections.PROFILE.route) {}
     composable(MainSections.CART.route) {}
