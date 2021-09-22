@@ -75,7 +75,11 @@ fun NavGraph(
                 modifier = modifier,
                 themes = themes,
                 plants = plants,
-                selected = selected
+                selected = selected,
+                onSearchAction = {},
+                onThemeClick = {},
+                onFilterButtonClick = {},
+                onPlantCheckedChange = { _, _ -> }
             )
         }
     }

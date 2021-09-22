@@ -48,14 +48,22 @@ fun NavGraphBuilder.addMainGraph(
     modifier: Modifier = Modifier,
     themes: List<Theme> = emptyList(),
     plants: List<Plant> = emptyList(),
-    selected: List<Plant> = emptyList()
+    selected: List<Plant> = emptyList(),
+    onSearchAction: (String) -> Unit = {},
+    onThemeClick: (Theme) -> Unit = {},
+    onFilterButtonClick: () -> Unit = {},
+    onPlantCheckedChange: (Plant, Boolean) -> Unit = { _, _ -> }
 ) {
     composable(MainSections.HOME.route) {
         Home(
             modifier = modifier,
             themes = themes,
             plants = plants,
-            selected = selected
+            selected = selected,
+            onSearchAction = onSearchAction,
+            onThemeClick = onThemeClick,
+            onFilterButtonClick = onFilterButtonClick,
+            onPlantCheckedChange = onPlantCheckedChange
         )
     }
     composable(MainSections.FAVORITES.route) {}

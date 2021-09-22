@@ -71,7 +71,11 @@ fun Home(
     modifier: Modifier = Modifier,
     themes: List<Theme> = emptyList(),
     plants: List<Plant> = emptyList(),
-    selected: List<Plant> = emptyList()
+    selected: List<Plant> = emptyList(),
+    onSearchAction: (String) -> Unit = {},
+    onThemeClick: (Theme) -> Unit = {},
+    onFilterButtonClick: () -> Unit = {},
+    onPlantCheckedChange: (Plant, Boolean) -> Unit = { _, _ -> }
 ) {
     var query by remember { mutableStateOf("") }
 
@@ -103,7 +107,7 @@ fun Home(
                     )
                 },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = {})
+                keyboardActions = KeyboardActions(onSearch = { onSearchAction(query) })
             )
 
             Text(
@@ -117,7 +121,8 @@ fun Home(
 
             ThemeCardRow(
                 modifier = Modifier.fillMaxWidth(),
-                themes = themes
+                themes = themes,
+                onThemeClick = onThemeClick
             )
 
             Row(
@@ -141,7 +146,7 @@ fun Home(
                 // 6 dp has been applied to the top arbitrarily to achieve the
                 // closest possible result.
                 IconButton(
-                    onClick = {},
+                    onClick = onFilterButtonClick,
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .size(24.dp)
@@ -160,7 +165,8 @@ fun Home(
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth(),
                 plants = plants,
-                selected = selected
+                selected = selected,
+                onPlantCheckedChange = onPlantCheckedChange
             )
         }
     }
@@ -169,27 +175,33 @@ fun Home(
 @Composable
 fun ThemeCardRow(
     modifier: Modifier = Modifier,
-    themes: List<Theme> = emptyList()
+    themes: List<Theme> = emptyList(),
+    onThemeClick: (Theme) -> Unit = {}
 ) {
     LazyRow(
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(themes) { theme -> ThemeCard(theme = theme) }
+        items(themes) { theme ->
+            ThemeCard(
+                theme = theme,
+                onClick = { onThemeClick(theme) }
+            )
+        }
     }
 }
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ThemeCard(theme: Theme, modifier: Modifier = Modifier) {
+fun ThemeCard(theme: Theme, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     // The surface color cannot be applied directly as the
     // backgroundColor on the Card because it has a percentage of
     // transparency and an unwanted border is visible underneath.
     Card(
         modifier = modifier
             .size(136.dp)
-            .clickable(onClick = {}),
+            .clickable(onClick = onClick),
         shape = MaterialTheme.shapes.small,
         backgroundColor = MaterialTheme.colors.background,
         elevation = 1.dp
@@ -224,7 +236,8 @@ fun ThemeCard(theme: Theme, modifier: Modifier = Modifier) {
 fun PlantList(
     modifier: Modifier = Modifier,
     plants: List<Plant> = emptyList(),
-    selected: List<Plant> = emptyList()
+    selected: List<Plant> = emptyList(),
+    onPlantCheckedChange: (Plant, Boolean) -> Unit = { _, _ -> }
 ) {
     LazyColumn(
         modifier = modifier,
@@ -234,7 +247,8 @@ fun PlantList(
         items(plants) { plant ->
             PlantRow(
                 plant = plant,
-                checked = selected.contains(plant)
+                checked = selected.contains(plant),
+                onCheckedChange = { checked -> onPlantCheckedChange(plant, checked) }
             )
         }
     }
@@ -245,7 +259,8 @@ fun PlantList(
 fun PlantRow(
     plant: Plant,
     modifier: Modifier = Modifier,
-    checked: Boolean = false
+    checked: Boolean = false,
+    onCheckedChange: (Boolean) -> Unit = {}
 ) {
     Row(
         modifier = modifier
@@ -292,7 +307,7 @@ fun PlantRow(
 
                 Checkbox(
                     checked = checked,
-                    onCheckedChange = {},
+                    onCheckedChange = onCheckedChange,
                     modifier = Modifier.padding(top = 16.dp),
                     colors = CheckboxDefaults.colors(
                         checkmarkColor = MaterialTheme.colors.onSecondary
